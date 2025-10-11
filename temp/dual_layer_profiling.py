@@ -1,13 +1,14 @@
 from sklearn.ensemble import IsolationForest
 from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import ParameterGrid
 
 import pandas as pd
 import numpy as np
 
 class InsiderThreatDetector:
     def __init__(self):
-        self.role_models = {}
-        self.role_scalers = {}
+         self.role_models = {}
+         self.role_scalers = {}
         
     def extract_features(self, user_data):
         features = []
@@ -40,7 +41,43 @@ class InsiderThreatDetector:
         self.role_scalers[role_name] = scaler
         
         return model
-    
+
+    def fine_tune_role_model(self, role_name, new_data, param_grid=None):
+        '''fine tunes the existing model by retraining it with updated parameters or data'''
+
+        if role_name not in self.role_models:
+            raise ValueError(f"No trained model found for role '{role_name}'")
+
+        features_old, _ = self.extract_features(new_data)
+        scaler = StandardScaler()
+        features_scaled = scaler.fit_transform(features_old)
+
+        if param_grid is None:
+            param_grid = {
+                'contamination': [0.05, 0.1, 0.15],
+                'n_estimators': [100, 200, 300],
+                'max_samples': ['auto', 256, 512]
+            }
+
+        best_model = None
+        best_score = -np.inf
+        best_params = None
+
+        for params in ParameterGrid(param_grid):
+            model = IsolationForest(random_state=42, **params)
+            model.fit(features_scaled)
+
+            avg_score = model.decision_function(features_scaled).mean()
+            if avg_score > best_score:
+                best_score = avg_score
+                best_model = model
+                best_params = params
+
+        self.role_models[role_name] = best_model
+        self.role_scalers[role_name] = scaler
+
+        return best_model, best_params
+
     def detect_anomaly(self, user_activity, role_name):
         
         if role_name not in self.role_models:
