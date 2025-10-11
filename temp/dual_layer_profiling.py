@@ -1,5 +1,6 @@
 from sklearn.ensemble import IsolationForest
 from sklearn.preprocessing import StandardScaler
+
 import pandas as pd
 import numpy as np
 
@@ -15,7 +16,6 @@ class InsiderThreatDetector:
         for user in user_data['user'].unique():
             user_df = user_data[user_data['user']==user]
             
-
             avg_session_time = user_df['session_duration'].mean()
             files_per_session = user_df['files_accessed'].mean()
             login_frequency = len(user_df[user_df['action']=='login'])
