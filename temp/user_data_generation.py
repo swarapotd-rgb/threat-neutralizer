@@ -22,5 +22,3 @@ def generate_user_data():
                     'anomaly': False
                 })
     return pd.DataFrame(normal_data)
-
-print(generate_user_data())
