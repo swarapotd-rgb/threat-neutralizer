@@ -4,6 +4,7 @@ from real_time_analytics import RealTimeAnalytics
 from demo_scenarios import DemoScenarios
 from user_data_generation import generate_user_data
 import json
+import pandas as pd
 app = Flask(__name__)
 
 detector = InsiderThreatDetector()
@@ -11,18 +12,20 @@ analytics = RealTimeAnalytics(detector)
 demo = DemoScenarios(analytics)
 
 training_data = generate_user_data()
-detector.role_models['analyst'] = detector.train_role_baseline(training_data)
+detector.train_role_baseline("analyst", training_data)
 
 @app.route('/analyze_activity', methods = ['POST'])
 def analyze_activity():
     '''endpoint for real-time activity analysis'''
     activity_log = request.json
-    result = analytics.process_activity_log(activity_log)
+    activity_df = pd.DataFrame(activity_log)
+    result = detector.detect_anomaly(activity_df, role_name = "analyst")
     return jsonify(result)
 
 @app.route('/demo/threat', methods = ['GET'])
 def demo_threat():
     '''demo for insider threat detection'''
+    demo_user_data = generate_user_data()
     results = demo.simulate_insider_threat()
     return jsonify({'scenario': 'insider_threat', 'results': results})
 
