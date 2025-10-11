@@ -106,7 +106,7 @@ def stream_events(rta, role_name="analyst"):
             print(f"  Risk Score: {result.get('risk_score', 'N/A'):.4f}")
             print(f"  Model Anomaly Flag: {result.get('is_anomaly', result.get('model_anomaly_flag', 'N/A'))}")
             if result.get('status') == 'THREAT_DETECTED':
-                print(f"  🚨 ALERT: {result.get('recommended_action')}")
+                print(f"  ALERT: {result.get('recommended_action')}")
                 print(f"  User: {result.get('user')}")
                 print(f"  Timestamp: {result.get('timestamp')}")
             print("-" * 60)
