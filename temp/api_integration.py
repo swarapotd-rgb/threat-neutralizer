@@ -26,7 +26,11 @@ def analyze_activity():
 def demo_threat():
     '''demo for insider threat detection'''
     demo_user_data = generate_user_data()
-    results = demo.simulate_insider_threat()
+    demo_user_data.loc[0, 'session_duration'] = 10
+    demo_user_data.loc[0, 'files_accessed'] = 25
+    demo_user_data.loc[0, 'timestamp'] = demo_user_data.loc[0, 'timestamp'].replace(hour=23)
+    results = detector.detect_anomaly(demo_user_data.head(1), role_name = "analyst")
+
     return jsonify({'scenario': 'insider_threat', 'results': results})
 
 @app.route('/user_profile/<user_id>', methods = ['GET'])
