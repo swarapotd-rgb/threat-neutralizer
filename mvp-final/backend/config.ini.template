@@ -1,0 +1,7 @@
+[auth]
+# TOTP secret for two-factor authentication
+# DO NOT commit the actual config.ini file to version control
+totp_secret = YOUR_TOTP_SECRET_HERE
+
+# API username
+username = YOUR_USERNAME_HERE
