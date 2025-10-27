@@ -226,76 +226,8 @@ curl -X POST "http://localhost:8000/login" \
 ### API Testing
 Use the interactive Swagger UI at http://localhost:8000/docs
 
----
 
-## 🎓 Lessons Learned
-
-### What Went Well ✅
-- Security-first approach from day one
-- FastAPI's auto-documentation saved hours
-- Modular architecture enabled parallel development
-- TailwindCSS accelerated UI development
-
-### Challenges Overcome 💪
-- Implementing RBAC within time constraints
-- Balancing security with user experience
-- TOTP clock synchronization
-- Rate limiting without external services
-
----
-
-## 🔮 Future Enhancements
-
-- [ ] PostgreSQL migration for production
-- [ ] Real-time notifications via WebSockets
-- [ ] File encryption at rest (AES-256)
-- [ ] User management dashboard
-- [ ] Mobile application (React Native)
-- [ ] SSO integration (OAuth 2.0)
-- [ ] Advanced analytics dashboard
-- [ ] Email notifications for security events
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-```bash
-# Fork the repository
-# Create your feature branch
-git checkout -b feature/AmazingFeature
-
-# Commit your changes
-git commit -m 'Add some AmazingFeature'
-
-# Push to the branch
-git push origin feature/AmazingFeature
-
-# Open a Pull Request
 ```
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License.
-
----
-
-## 👥 Team
-
-Built with ❤️ during a 30-hour hackathon sprint!
-
----
-
-## 📬 Contact
-
-- **GitHub**: [@swarapotd-rgb](https://github.com/swarapotd-rgb)
-- **Project Link**: [https://github.com/swarapotd-rgb/threat-neutralizer](https://github.com/swarapotd-rgb/threat-neutralizer)
-
----
-
 <div align="center">
 
 ### ⭐ If you found this project interesting, please consider giving it a star!
